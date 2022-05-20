@@ -1,0 +1,149 @@
+{% extends "base.html" %}
+{% block title %}Account{% endblock %}
+{% block head %}
+    {{ super() }}
+{% endblock %}
+{% block body %}
+
+    {% block header %}
+        {{ super() }}
+    {% endblock %}
+
+    {% block navigation %}
+        {{ super() }}
+        <!--Enter navigation markup-->
+    {% endblock %}
+
+
+    {% block main_content %}
+        
+    <div class="account-container">
+        <div class="account-row">
+            <div class="user-aside">
+                <div class="user-aside-row">
+                    <div class="user-avatar-container">
+                        <i class="fas fa-user-alt user-avatar"></i>
+                        <span class="admin-title">Adminstrator</span>
+                    </div>
+                    <div class="username account-control-container">
+                        <i class="fas fa-user-circle account-icon"></i>
+                        <input type="text" class="account-input-control" value="Username" name="username-input"/>
+                        
+                    </div>
+                    <div class="user-phone account-control-container">
+                        <i class="fas fa-eye account-icon"></i>
+                        <input type="password" class="account-input-control" value="*********" name="password-input"/>
+                        
+                    </div>
+                    <div class="user-password account-control-container">
+                        <i class="fas fa-phone-alt account-icon"></i>
+                        <input type="text" class="account-input-control" value="0778275503" name="phone-input"/>
+                        
+                    </div>
+                    <div class="account-action-buttons">
+                        <button class="submit-button edit-button"><i class="fas fa-edit"></i></button>
+                        <button class=" delete-button submit-button"><i class="fas fa-save"></i></button>
+                    </div>
+                </div> 
+            </div>
+            <div class="account-main-container">
+                <div class="account-tabs-container">
+                    <div class="account-tabs-row">
+                        <div class="account-tab">
+                            <span class="tab-title">Users</span>
+                            <span class="tab-count">5</span>
+                        </div>
+                        <div class="account-tab">
+                            <span class="tab-title">Vehicles</span>
+                            <span class="tab-count">3</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="account-lists-area">
+                    <div class="lists-area-row">
+                        <div class="vehicles-list">
+                            <div class="list-item account-list-item">
+                                <div class="list-item-grid">
+                                    <div class="item-grid-entry">
+                                        <span class="item-title">Vehicle License</span>
+                                        <span class="item-value"> ADR 0987</span>
+                                    </div>
+                                    <div class="item-grid-entry">
+                                        <span class="item-title">Drive in date</span>
+                                        <span class="item-value"> 23/04/2015 09.45</span>
+                                    </div>
+                                    <div class="item-grid-entry">
+                                        <span class="item-title">Drive out date</span>
+                                        <span class="item-value"> 23/04/2015 15.45</span>
+                                    </div>
+                                    <div class="item-grid-entry">
+                                        <span class="item-title">Served By</span>
+                                        <div class="vehicle-server">Bruce Chimoyo</div>
+                                    </div>
+                                    <div class="item-grid-entry">
+                                        <span class="item-title">Actions</span>
+                                        <button class="submit-button delete-button">Delete</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="list-item account-list-item">
+                                <div class="list-item-grid">
+                                    <div class="item-grid-entry">
+                                        <span class="item-title">Vehicle License</span>
+                                        <span class="item-value"> ADR 0987</span>
+                                    </div>
+                                    <div class="item-grid-entry">
+                                        <span class="item-title">Drive in date</span>
+                                        <span class="item-value"> 23/04/2015 09.45</span>
+                                    </div>
+                                    <div class="item-grid-entry">
+                                        <span class="item-title">Drive out date</span>
+                                        <span class="item-value"> 23/04/2015 15.45</span>
+                                    </div>
+                                    <div class="item-grid-entry">
+                                        <span class="item-title">Served By</span>
+                                        <div class="vehicle-server">Bruce Chimoyo</div>
+                                    </div>
+                                    <div class="item-grid-entry">
+                                        <span class="item-title">Actions</span>
+                                        <button class="submit-button delete-button">Delete</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="list-item account-list-item">
+                                <div class="list-item-grid">
+                                    <div class="item-grid-entry">
+                                        <span class="item-title">Vehicle License</span>
+                                        <span class="item-value"> ADR 0987</span>
+                                    </div>
+                                    <div class="item-grid-entry">
+                                        <span class="item-title">Drive in date</span>
+                                        <span class="item-value"> 23/04/2015 09.45</span>
+                                    </div>
+                                    <div class="item-grid-entry">
+                                        <span class="item-title">Drive out date</span>
+                                        <span class="item-value"> 23/04/2015 15.45</span>
+                                    </div>
+                                    <div class="item-grid-entry">
+                                        <span class="item-title">Served By</span>
+                                        <div class="vehicle-server">Bruce Chimoyo</div>
+                                    </div>
+                                    <div class="item-grid-entry">
+                                        <span class="item-title">Actions</span>
+                                        <button class="submit-button delete-button">Delete</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endblock %}
+
+    {% block footer %}
+        {{ super() }}
+    {% endblock %}
+
+{% endblock %}

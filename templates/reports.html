@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% block title %}Reports{% endblock %}
+{% block head %}
+    {{ super() }}
+{% endblock %}
+{% block body %}
+    {% block header %}
+        {{ super() }}
+    {% endblock %}
+    {% block navigation %}
+        {{ super() }}
+        <!--Enter navigation markup-->
+    {% endblock %}
+
+
+    {% block main_content %}
+
+        <div class="reports-container">
+            <div class="reports-row">
+                <div class="reports-header">
+                    <div class="reports-container">
+                        <span class="reports-title">Reports<span/>   
+                    </div>
+                </div>
+                <div class="reports-message-container">
+                    <div class="reports-message-row">
+                        <p>Reports will be generated and exported to Excel.</p>
+                    </div>
+                    <div class="report-items">
+                        <div class="report-item">
+                            <label class="section-title" for="date-range" >Vehicle logs<label/>
+                            <div class="date-range">
+                                <div class="date-item">
+                                    <span class="from-title date-title">From</span>
+                                    <input type="datetime-local" name="dtlPicker1" id="from-date" class="date-input"/>
+                                </div>
+                                <div class="date-item">
+                                    <span class="from-title date-title">To</span>
+                                    <input type="datetime-local" name="dtlPicker2" id="to-date" class="date-input"/>
+                                </div>
+                            </div>
+                            <div class="validation-error_message datetime-error">Pick a valid date</div>
+                            <div class="report-buttons">
+                                <button class="submit-button generate-button">Generate</button>
+                                <button class="submit-button download-button">Download</button>
+                            </div>
+                        </div>
+                        <div class="report-item">
+                            <label class="section-title" for="date-range" >Users<label/>
+                            <div class="date-range">
+                                <div class="date-item">
+                                    <span class="from-title date-title">from</span>
+                                    <input type="datetime-local" name="dtlPicker3" id="from-date" class="date-input"/>
+                                </div>
+                                <div class="date-item">
+                                    <span class="from-title date-title">to</span>
+                                    <input type="datetime-local" name="dtlPicker" class="date-input" id="to-date"/>
+                                </div>
+                            </div>
+                            <div class="validation-error_message datetime-error">Pick a valid date</div>
+                            <div class="report-buttons">
+                                <button class="submit-button generate-button">Generate</button>
+                                <button class="submit-button download-">Download</button>
+                            </div>
+                        </div>
+                    </div>   
+                </div>
+            </div>
+        </div>
+    {% endblock %}
+
+    {% block footer %}
+        {{ super() }}
+    {% endblock %}
+
+{% endblock %}

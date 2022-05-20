@@ -1,0 +1,45 @@
+{% extends "base.html" %} {% block title %}Login{% endblock %} {% block head %} {{ super() }} {% endblock %} {% block body %} {% block header %} {{ super() }} {% endblock %} {% block navigation %} {{ super() }} {% endblock %} {% block main_content %}
+<div class="home-container">
+    <div class="home-row">
+        <div clas="home-message">
+            <p class="welcome-heading">
+                <span class="smartpark-highlighted">SmartPark &nbsp;</span>Login
+            </p>
+        </div>
+        <div class="image-wrapper">
+            <img class="logo-image" src="/static/img/logo.png">
+        </div>
+        <div class="login-form-section">
+            <div class="login-row">
+                <form class="login-form" method="POST" action="/login">
+                    {{ form.csrf_token }}
+                        <div class="username-container input-container">
+                            <div class="label-wrapper"><label for="username" class="input-label">Username</label></div>
+                            <input name="username" id="username" class="input-item" type="text">
+                            {% if error %}
+                                <div class="label-wrapper"><span class="validation-error_message">{{ error }}</span></div>
+                            {% endif%}
+
+                        </div>
+
+                        <div class="password-area input-container">
+                            <div class="label-wrapper"><label for="username" class="input-label">Password</label></div>
+                            <input name="password" class="input-item" id="password" type="password"> 
+                            {% if error %}
+                                <div class="label-wrapper"><span class="validation-error_message">{{ error }}</span></div>
+                            {% endif%}
+                            
+                        </div>
+                        <div class="forgot-password_container">
+                            <a href="#" class="forgot-password_link">Forgot password?</a>
+                        </div>
+                        <div class="buttons-container">
+                            <input class="login-button submit-button" type="submit" value="Login">
+                            <input class="clear-button submit-button" type="button" value="Clear">
+                        </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} {% block footer %} {{ super() }} {% endblock %} {% endblock %}
