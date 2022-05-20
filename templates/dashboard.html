@@ -1,48 +1,29 @@
-{% extends "base.html" %}
-{% block title %}Dashboard{% endblock %}
-{% block head %}
-    {{ super() }}
-{% endblock %}
-{% block body %}
-    {% block header %}
-        {{ super() }}
-    {% endblock %}
-    {% block navigation %}
-        {{ super() }}
-        <!--Enter navigation markup-->
-    {% endblock %}
+{% extends "base.html" %} {% block title %}Dashboard{% endblock %} {% block head %} {{ super() }} {% endblock %} {% block body %} {% block header %} {{ super() }} {% endblock %} {% block navigation %} {{ super() }}
+<!--Enter navigation markup-->
+{% endblock %} {% block main_content %}
 
+<div class="dashboard-container">
+    <div class="dashboard-row">
 
-    {% block main_content %}
-
-        <div class="dashboard-container">
-            <div class="dashboard-row">
-                
-                <div class="survaillance-section">
-                    <div class="survailance-row">
-                        <div class="survaillance-container">
-                            <div class="survaillance-header">
-                                <i class="fas video-stream_icon fa-video-camera"></i>
-                                <div class="stream-button"></div>
-                                <div class="date-and-time">12.03.2022, 0945AM</div>
-                            </div>
-                            <div class="video-feed_container">
-                                <img src="{{url_for('video')}}" class="entrance-feed feed-section"/>
-                                <img src="{{url_for('video')}}" class="exit-feed feed-section"/>
-                            </div>
-                            <div class="stream-buttons_container">
-                                <button class="submit-button stream-action-button">Save and Authenticate</button>
-                                <button class="submit-button stream-action-button">Reject Vehicle</button>
-                            </div>
-                        </div>
+        <div class="survaillance-section">
+            <div class="survailance-row">
+                <div class="survaillance-container">
+                    <div class="survaillance-header">
+                        <i class="fas video-stream_icon fa-video-camera"></i>
+                        <div class="stream-button blink"></div>
+                        <div class="date-and-time">12.03.2022, 0945AM</div>
+                    </div>
+                    <div class="video-feed_container">
+                        <img src="{{url_for('video')}}" class="entrance-feed feed-section" />
+                        <img src="{{url_for('video')}}" class="exit-feed feed-section" />
+                    </div>
+                    <div class="stream-buttons_container">
+                        <button class="submit-button stream-action-button">Save and Authenticate</button>
+                        <button class="submit-button stream-action-button">Reject Vehicle</button>
                     </div>
                 </div>
             </div>
         </div>
-    {% endblock %}
-
-    {% block footer %}
-        {{ super() }}
-    {% endblock %}
-
-{% endblock %}
+    </div>
+</div>
+{% endblock %} {% block footer %} {{ super() }} {% endblock %} {% endblock %}

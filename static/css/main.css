@@ -9,6 +9,37 @@
     font-size: calc(1vw + 0.6em);
 }
 
+
+/*=====================Scrollbar code==============*/
+
+
+/* width */
+
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+
+/* Track */
+
+ ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+
+/* Handle */
+
+ ::-webkit-scrollbar-thumb {
+    background: #888;
+}
+
+
+/* Handle on hover */
+
+ ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
 *,
 *::before,
 *::after {
@@ -453,6 +484,7 @@ p {
 .survaillance-header {
     display: flex;
     align-items: center;
+    margin: .5rem;
 }
 
 .survaillance-section {
@@ -470,7 +502,6 @@ p {
     margin: 1em 8em;
     padding: 1em;
     height: 585.285px;
-    box-shadow: rgba(67, 71, 85, 0.27) 0px 0px 0.25em, rgba(90, 125, 188, 0.05) 0px 0.25em 1em;
 }
 
 .survaillance-container {
@@ -495,23 +526,30 @@ p {
 }
 
 .date-and-time {
-    font-size: .75rem;
-    font-weight: 500;
+    font-size: .8rem;
+    font-weight: 600;
 }
 
 .video-feed_container {
     display: flex;
+    width: 100%;
 }
 
 .video-feed_container>.feed-section {
+    position: relative;
     flex-grow: 1;
     height: 430px;
+    width: 650px;
     margin: .25rem;
     background-color: black;
 }
 
+.feed-container>.feed-section {
+    width: 650px;
+}
+
 .video-stream_icon {
-    margin-right: .25rem;
+    margin-right: .5rem;
 }
 
 .stream-buttons_container {
@@ -529,6 +567,26 @@ p {
 }
 
 
+/*===========================Blink the stream button================*/
+
+.blink {
+    animation: blink-animation 1s steps(5, start) infinite;
+    -webkit-animation: blink-animation 1s steps(5, start) infinite;
+}
+
+@keyframes blink-animation {
+    to {
+        visibility: hidden;
+    }
+}
+
+@-webkit-keyframes blink-animation {
+    to {
+        visibility: hidden;
+    }
+}
+
+
 /*===========================VEHICLES STYLING=====================*/
 
 .vehicles-header {
@@ -542,9 +600,8 @@ p {
 .date-input {
     font-size: inherit;
     padding: .8rem 3rem;
-    border-radius: .5rem;
+    border-radius: .25rem;
     border: .7px solid black;
-    border-radius: .5rem;
 }
 
 .date-input {
@@ -570,20 +627,25 @@ p {
 }
 
 .vehicles-list-container {
-    margin-top: .875rem;
+    margin-top: 2rem;
 }
 
 .vehicles-list-row {
     padding: 0 .5em;
+    margin-top: .875rem;
     display: grid;
+    height: 450px;
     grid-gap: .7rem;
     grid-template-rows: auto;
+    overflow-y: auto;
 }
 
 .list-item {
+    margin: .15rem;
     padding: .5rem;
     border-radius: .5rem;
-    box-shadow: rgba(67, 71, 85, 0.27) 0px 0px 0.25em, rgba(90, 125, 188, 0.05) 0px 0.25em 1em;
+    height: 85px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;
 }
 
 .list-item-grid {

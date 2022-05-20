@@ -1,163 +1,47 @@
-{% extends "base.html" %}
-{% block title %}Vehicles{% endblock %}
-{% block head %}
-    {{ super() }}
-{% endblock %}
-{% block body %}
-    {% block header %}
-        {{ super() }}
-    {% endblock %}
-    {% block navigation %}
-        {{ super() }}
-        <!--Enter navigation markup-->
-    {% endblock %}
+{% extends "base.html" %} {% block title %}Vehicles{% endblock %} {% block head %} {{ super() }} {% endblock %} {% block body %} {% block header %} {{ super() }} {% endblock %} {% block navigation %} {{ super() }}
+<!--Enter navigation markup-->
+{% endblock %} {% block main_content %}
 
-
-    {% block main_content %}
-
-        <div class="vehicles-container">
-            <div class="vehicles-row">
-                <div class="vehicles-header">
-                    <div class="search-container">
-                        <input class="input-control" type="text" placeholder="Search by license plate"/>
-                       
-                    </div>
-                    <select class="filter-select" default="Filter By:">
+<div class="vehicles-container">
+    <div class="vehicles-row">
+        <div class="vehicles-header">
+            <div class="search-container">
+                <input class="input-control" type="text" placeholder="Search by license plate" />
+            </div>
+            <select class="filter-select" default="Filter By:">
                         <option>Today Only</option>
                         <option>Without driveout date</option>
                         <option>Most frequent</option>
                     </select>
-                </div>
-                <div class="vehicles-list-container">
-                    <div class="vehicles-list-row">
-                        <div class="list-item">
-                            <div class="list-item-grid">
-                                <div class="item-grid-entry">
-                                    <span class="item-title">Vehicle License</span>
-                                    <span class="item-value"> ADR 0987</span>
-                                </div>
-                                <div class="item-grid-entry">
-                                    <span class="item-title">Drive in date</span>
-                                    <span class="item-value"> 23/04/2015 09.45</span>
-                                </div>
-                                <div class="item-grid-entry">
-                                    <span class="item-title">Drive out date</span>
-                                    <span class="item-value"> 23/04/2015 15.45</span>
-                                </div>
-                                <div class="item-grid-entry">
-                                    <span class="item-title">Image</span>
-                                    <div class="vehicle-image"></div>
-                                </div>
-                                <div class="item-grid-entry">
-                                    <span class="item-title">Actions</span>
-                                    <button class="submit-button delete-button">Delete</button>
-                                </div>
-                            </div>
+        </div>
+        <div class="vehicles-list-container">
+            <div class="vehicles-list-row">
+                <div class="list-item">
+                    <div class="list-item-grid">
+                        <div class="item-grid-entry">
+                            <span class="item-title">Vehicle License</span>
+                            <span class="item-value"> ADR 0987</span>
                         </div>
-                        <div class="list-item">
-                            <div class="list-item-grid">
-                                <div class="item-grid-entry">
-                                    <span class="item-title">Vehicle License</span>
-                                    <span class="item-value"> ADR 0987</span>
-                                </div>
-                                <div class="item-grid-entry">
-                                    <span class="item-title">Drive in date</span>
-                                    <span class="item-value"> 23/04/2015 09.45</span>
-                                </div>
-                                <div class="item-grid-entry">
-                                    <span class="item-title">Drive out date</span>
-                                    <span class="item-value"> 23/04/2015 15.45</span>
-                                </div>
-                                <div class="item-grid-entry">
-                                    <span class="item-title">Image</span>
-                                    <div class="vehicle-image"></div>
-                                </div>
-                                <div class="item-grid-entry">
-                                    <span class="item-title">Actions</span>
-                                    <button class="submit-button delete-button">Delete</button>
-                                </div>
-                            </div>
+                        <div class="item-grid-entry">
+                            <span class="item-title">Drive in date</span>
+                            <span class="item-value"> 23/04/2015 09.45</span>
                         </div>
-                        <div class="list-item">
-                            <div class="list-item-grid">
-                                <div class="item-grid-entry">
-                                    <span class="item-title">Vehicle License</span>
-                                    <span class="item-value"> ADR 0987</span>
-                                </div>
-                                <div class="item-grid-entry">
-                                    <span class="item-title">Drive in date</span>
-                                    <span class="item-value"> 23/04/2015 09.45</span>
-                                </div>
-                                <div class="item-grid-entry">
-                                    <span class="item-title">Drive out date</span>
-                                    <span class="item-value"> 23/04/2015 15.45</span>
-                                </div>
-                                <div class="item-grid-entry">
-                                    <span class="item-title">Image</span>
-                                    <div class="vehicle-image"></div>
-                                </div>
-                                <div class="item-grid-entry">
-                                    <span class="item-title">Actions</span>
-                                    <button class="submit-button delete-button">Delete</button>
-                                </div>
-                            </div>
+                        <div class="item-grid-entry">
+                            <span class="item-title">Drive out date</span>
+                            <span class="item-value"> 23/04/2015 15.45</span>
                         </div>
-                        <div class="list-item">
-                            <div class="list-item-grid">
-                                <div class="item-grid-entry">
-                                    <span class="item-title">Vehicle License</span>
-                                    <span class="item-value"> ADR 0987</span>
-                                </div>
-                                <div class="item-grid-entry">
-                                    <span class="item-title">Drive in date</span>
-                                    <span class="item-value"> 23/04/2015 09.45</span>
-                                </div>
-                                <div class="item-grid-entry">
-                                    <span class="item-title">Drive out date</span>
-                                    <span class="item-value"> 23/04/2015 15.45</span>
-                                </div>
-                                <div class="item-grid-entry">
-                                    <span class="item-title">Image</span>
-                                    <div class="vehicle-image"></div>
-                                </div>
-                                <div class="item-grid-entry">
-                                    <span class="item-title">Actions</span>
-                                    <button class="submit-button delete-button">Delete</button>
-                                </div>
-                            </div>
+                        <div class="item-grid-entry">
+                            <span class="item-title">Image</span>
+                            <div class="vehicle-image"></div>
                         </div>
-                        <div class="list-item">
-                            <div class="list-item-grid">
-                                <div class="item-grid-entry">
-                                    <span class="item-title">Vehicle License</span>
-                                    <span class="item-value"> ADR 0987</span>
-                                </div>
-                                <div class="item-grid-entry">
-                                    <span class="item-title">Drive in date</span>
-                                    <span class="item-value"> 23/04/2015 09.45</span>
-                                </div>
-                                <div class="item-grid-entry">
-                                    <span class="item-title">Drive out date</span>
-                                    <span class="item-value"> 23/04/2015 15.45</span>
-                                </div>
-                                <div class="item-grid-entry">
-                                    <span class="item-title">Image</span>
-                                    <div class="vehicle-image"></div>
-                                </div>
-                                <div class="item-grid-entry">
-                                    <span class="item-title">Actions</span>
-                                    <button class="submit-button delete-button">Delete</button>
-                                </div>
-                            </div>
+                        <div class="item-grid-entry">
+                            <span class="item-title">Actions</span>
+                            <i class="fa-solid fa-trash delete-icon"></i>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    {% endblock %}
-
-    {% block footer %}
-        {{ super() }}
-    {% endblock %}
-
-{% endblock %}
+    </div>
+</div>
+{% endblock %} {% block footer %} {{ super() }} {% endblock %} {% endblock %}
