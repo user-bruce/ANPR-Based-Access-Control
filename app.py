@@ -89,7 +89,10 @@ def account_page():
 
 @app.route('/reports')
 def reports_page():
-    return render_template('reports.html')
+
+    #The error variales
+    date_error = None
+    return render_template('reports.html', error=date_error)
 
 @app.route('/users')
 def users_page():
