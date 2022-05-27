@@ -1,0 +1,53 @@
+{% extends "base.html" %} {% block title %}Account{% endblock %} {% block head %} {{ super() }} {% endblock %} {% block body %} {% block header %} {{ super() }} {% endblock %} {% block navigation %} {{ super() }}
+<!--Enter navigation markup-->
+{% endblock %} {% block main_content %}
+
+<div class="account-container">
+    <div class="account-row">
+        <div class="user-aside">
+            <div class="new-user-header">
+                <span class="profile-title">Edit Profile</span>
+                <div class="passwords-warning">
+                    <i class="fa-solid fa-circle-exclamation warning-sign"></i>
+                    <p class="passwords-warning">You are strongly advised to change the default account details that you recieve when your account is created</p>
+                </div>
+            </div>
+            <div class="account-main-container">
+
+                <div class="account-lists-area">
+                    <div class="lists-area-row">
+                        <div class="add-user-area">
+                            <div class="add-user-form">
+                                <form action="/profile" method="POST" class="user-form">
+                                    {{ form.csrf_token }}
+                                    <div class="username-container input-container">
+                                        <div class="label-wrapper"><label for="username" class="input-label">Username</label></div>
+                                        <input name="username" id="username" class="input-item" type="text"> {% if username_error %}
+                                        <div class="label-wrapper"><span class="validation-error_message">{{ username_error }}</span></div>
+                                        {% endif%}
+                                    </div>
+                                    <div class="username-container input-container">
+                                        <div class="label-wrapper"><label for="username" class="input-label">Phone</label></div>
+                                        <input name="phone" id="phone" class="input-item" type="text"> {% if phone_error %}
+                                        <div class="label-wrapper"><span class="validation-error_message">{{ phone_error }}</span></div>
+                                        {% endif%}
+                                    </div>
+                                    <div class="password-area input-container">
+                                        <div class="label-wrapper"><label for="username" class="input-label">Password</label></div>
+                                        <input name="password" class="input-item" id="password" type="password"> {% if password_error %}
+                                        <div class="label-wrapper"><span class="validation-error_message">{{ password_error }}</span></div>
+                                        {% endif%}
+                                    </div>
+                                    <div class="buttons-container user-form-buttons">
+                                        <input class="login-button submit-button" type="submit" value="Save">
+                                        <input class="clear-button submit-button" type="button" value="Discard">
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endblock %} {% block footer %} {{ super() }} {% endblock %} {% endblock %}

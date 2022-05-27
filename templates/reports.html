@@ -26,8 +26,37 @@
                 </div>
             <div class="reports-row">
                 <div class="report-items">
-                        <div class="report-item">
-                            <label class="section-title" for="date-range" >VEHICLES<label/>
+                        <form class="vehicle-reports" method="POST" action="/vehicle-reports">
+                        {% if vehicles_form %}
+                            {{ vehicles_form.csrf_token }}
+                        {% endif %}
+                            <div class="report-item">
+                                <label class="section-title" for="date-range" >VEHICLES<label/>
+                                <div class="date-range">
+                                    <div class="date-item">
+                                        <span class="from-title date-title">Report From</span>
+                                        <input type="datetime-local" name="dtlPicker1" id="from-date" class="date-input"/>
+                                    </div>
+                                    <div class="date-item">
+                                        <span class="from-title date-title">Report To</span>
+                                        <input type="datetime-local" name="dtlPicker2" id="to-date" class="date-input"/>
+                                    </div>
+                                </div>
+                                {% if error %}
+                                    <div class="validation-error_message datetime-error">{{error}}</div>
+                                {% endif %}
+                                <div class="report-buttons">
+                                    <button type="submit" class="submit-button generate-button">Generate</button>
+                                    <button  class="submit-button download-button">Download</button>
+                                </div>
+                            </div>
+                        </form>
+                        <form class="user-reports" method="POST" action="/user-reports">
+                        {% if user_form %}
+                            {{ user_form.csrf_token }}
+                        {% endif %}
+                            <div class="report-item">
+                            <label class="section-title" for="date-range" >USERS<label/>
                             <div class="date-range">
                                 <div class="date-item">
                                     <span class="from-title date-title">Report From</span>
@@ -35,37 +64,18 @@
                                 </div>
                                 <div class="date-item">
                                     <span class="from-title date-title">Report To</span>
-                                    <input type="datetime-local" name="dtlPicker2" id="to-date" class="date-input"/>
+                                    <input type="datetime-local" name="dtlPicker2" class="date-input" id="to-date"/>
                                 </div>
                             </div>
                             {% if error %}
-                                <div class="validation-error_message datetime-error">Pick a valid date</div>
+                                <div class="validation-error_message datetime-error">{{error}}</div>
                             {% endif %}
                             <div class="report-buttons">
-                                <button class="submit-button generate-button">Generate</button>
-                                <button class="submit-button download-button">Download</button>
-                            </div>
-                        </div>
-                        <div class="report-item">
-                            <label class="section-title" for="date-range" >USERS<label/>
-                            <div class="date-range">
-                                <div class="date-item">
-                                    <span class="from-title date-title">Report From</span>
-                                    <input type="datetime-local" name="dtlPicker3" id="from-date" class="date-input"/>
-                                </div>
-                                <div class="date-item">
-                                    <span class="from-title date-title">Report To</span>
-                                    <input type="datetime-local" name="dtlPicker" class="date-input" id="to-date"/>
-                                </div>
-                            </div>
-                            {% if error %}
-                                <div class="validation-error_message datetime-error">Pick a valid date</div>
-                            {% endif %}
-                            <div class="report-buttons">
-                                <button class="submit-button generate-button">Generate</button>
+                                <button type="submit" class="submit-button generate-button">Generate</button>
                                 <button class="submit-button download-">Download</button>
                             </div>
-                        </div>   
+                        </div>
+                        </form>
                 </div>
             </div>
         </div>

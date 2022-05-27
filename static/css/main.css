@@ -65,7 +65,7 @@ a:visited {
 }
 
 a:hover {
-    text-decoration: underline;
+    text-decoration: none;
     color: white;
     background-color: orangered;
     cursor: pointer;
@@ -348,9 +348,6 @@ p {
     .footer-row {
         padding: 0 1em;
     }
-    .home-row {
-        margin-top: 1.5rem;
-    }
     .page-header {
         padding: 1em;
     }
@@ -541,7 +538,7 @@ p {
 .video-feed_container>.feed-section {
     position: relative;
     flex-grow: 1;
-    height: 430px;
+    height: 550px;
     width: 650px;
     margin: .25rem;
     background-color: black;
@@ -797,7 +794,7 @@ p {
     align-items: center;
     gap: 10rem;
     max-width: 650px;
-    padding: .5rem .25rem;
+    padding: .875rem .5rem;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;
     grid-template-columns: 1fr 6fr;
 }
@@ -817,6 +814,13 @@ p {
     gap: .875rem;
 }
 
+.entities-container>a {
+    color: black;
+    width: 150px;
+    padding: 8px 15px;
+    border-radius: 5px;
+}
+
 .entity-icon {
     margin-right: .5rem;
     font-size: 1.25rem;
@@ -829,11 +833,20 @@ p {
     font-weight: 600;
 }
 
+.user-role {
+    width: 150px;
+    padding: 8px 15px;
+    border-radius: 5px;
+}
+
 .lists-area-row {
     margin-top: 1rem;
 }
 
 .names-row {
+    width: 150px;
+    padding: 8px 15px;
+    border-radius: 5px;
     display: flex;
     align-items: center;
     justify-content: flex-start;
@@ -850,6 +863,10 @@ p {
 .user-edit-button:hover {
     background-color: rgb(209, 203, 203);
     cursor: pointer;
+}
+
+.entity-item {
+    padding: 3px 5px;
 }
 
 .profile-container {
@@ -948,3 +965,94 @@ p {
     margin: .5rem .25rem;
     box-shadow: rgb(0 0 0 / 10%) 0px 0px 5px 0px, rgb(0 0 0 / 10%) 0px 0px 1px 0px;
 }
+
+
+/* Add new user functionality */
+
+.add-user-button {
+    font-size: 1.5rem;
+    color: black;
+    margin-left: 3em;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.search-container {
+    display: flex;
+    align-items: center;
+}
+
+.add-user-button:hover {
+    color: white;
+    background-color: rgb(57, 56, 56);
+}
+
+.new-user-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.new-user-text {
+    text-align: center;
+    align-self: center;
+    max-width: 520px;
+}
+
+.user-form {
+    display: grid;
+    grid-template-rows: auto;
+    gap: 15px;
+}
+
+.add-user-link:hover {
+    background-color: white;
+}
+
+.edit-user-button:hover {
+    background-color: white;
+}
+
+.user-form-buttons {
+    max-width: 120px;
+    display: flex;
+    justify-self: center;
+    align-items: center;
+    justify-content: center;
+}
+
+.new-user-title,
+.profile-title {
+    font-size: 2.25rem;
+    font-weight: 600;
+}
+
+.profile-title {
+    margin: 5px 0;
+}
+
+.warning-sign {
+    margin-right: 10px;
+    color: red;
+}
+
+.passwords-warning {
+    display: flex;
+    margin: 0;
+    align-items: center;
+    justify-content: center;
+}
+
+.profile-section {
+    width: 150px;
+    padding: 8px 15px;
+    border-radius: 5px;
+}
+
+
+/* Add new user functionality */
+
+
+/* Add new user functionality */

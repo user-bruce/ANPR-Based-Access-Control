@@ -11,114 +11,66 @@
                         <i class="fa-solid fa-circle-user user-avatar"></i>
                     </div>
                     <div class="name-and-edit-container">
-                        <div class="names-row">
+                        <div class="names-row profile-section">
                             <span class="user-name">Bruce@1998</span>
-                            <i class="user-edit-button"><i class="fa-solid fa-pen"></i></i>
+                            <a class="edit-user-button" href={{"./profile"}}>
+                                <div><i class="user-edit-button"><i class="fa-solid fa-pen"></i></i>
+                                </div>
+                            </a>
                         </div>
-                        <span class="user-role">SYSTEM USER</span>
+                        <span class="user-role profile-section">SYSTEM USER</span>
                     </div>
                 </div>
                 <div class="entities-container">
-                    <div class="entity-item">
-                        <i class="fa-solid fa-car entity-icon"></i>
-                        <span class="entity-name">Vehicles</span>
-                        <span class="entity-count">4</span>
-                    </div>
-                    <div class="entity-item">
-                        <i class="fa-solid fa-circle-user entity-icon"></i>
-                        <span class="entity-name">Users</span>
-                        <span class="entity-count">2</span>
-                    </div>
+                    <a href={{ "./account"}}>
+                        <div class="entity-item">
+                            <i class="fa-solid fa-car entity-icon"></i>
+                            <span class="entity-name">Vehicles</span>
+                        </div>
+                    </a>
+                    <a href={{ "./users"}}>
+                        <div class="entity-item">
+                            <i class="fa-solid fa-circle-user entity-icon"></i>
+                            <span class="entity-name">Users</span>
+                        </div>
+                    </a>
                 </div>
             </div>
             <div class="account-main-container">
 
                 <div class="account-lists-area">
                     <div class="lists-area-row">
-                        <div class="serach-container">
-                            <input name="search-input" class="input-item search-input-control" placeholder="Search users" type="text"> </div>
+                        <div class="search-container">
+                            <input name="search-input" class="input-item search-input-control" placeholder="Search users" type="text">
+                            <a href={{ "./add-user"}} class="add-user-link">
+                                <i class="fa-solid fa-user-plus add-user-button"></i>
+                            </a>
+                        </div>
                         <div class="vehicles-list">
                             <div class="list-item account-list-item">
                                 <div class="list-item-grid">
                                     <div class="item-grid-entry">
-                                        <span class="item-title">Vehicle License</span>
-                                        <span class="item-value"> ADR 0987</span>
+                                        <span class="item-title">Username</span>
+                                        <span class="item-value">bruce@34</span>
                                     </div>
                                     <div class="item-grid-entry">
-                                        <span class="item-title">Image</span>
-                                        <span class="item-value"> image</span>
+                                        <span class="item-title">Phone</span>
+                                        <span class="item-value">0775667548</span>
                                     </div>
                                     <div class="item-grid-entry">
-                                        <span class="item-title">Drive in date</span>
+                                        <span class="item-title">Joined date</span>
                                         <span class="item-value"> 23/04/2015 09.45</span>
                                     </div>
                                     <div class="item-grid-entry">
-                                        <span class="item-title">Drive out date</span>
-                                        <span class="item-value"> 23/04/2015 15.45</span>
+                                        <span class="item-title">Email</span>
+                                        <div class="vehicle-server">chimoyo.bruce@yahoo.com</div>
                                     </div>
                                     <div class="item-grid-entry">
-                                        <span class="item-title">Served By</span>
-                                        <div class="vehicle-server">Bruce Chimoyo</div>
-                                    </div>
-                                    <div class="item-grid-entry">
-                                        <span class="item-title">Actions</span>
-                                        <button class="submit-button delete-button">Delete</button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="list-item account-list-item">
-                                <div class="list-item-grid">
-                                    <div class="item-grid-entry">
-                                        <span class="item-title">Vehicle License</span>
-                                        <span class="item-value"> ADR 0987</span>
-                                    </div>
-                                    <div class="item-grid-entry">
-                                        <span class="item-title">Image</span>
-                                        <span class="item-value"> image</span>
-                                    </div>
-                                    <div class="item-grid-entry">
-                                        <span class="item-title">Drive in date</span>
-                                        <span class="item-value"> 23/04/2015 09.45</span>
-                                    </div>
-                                    <div class="item-grid-entry">
-                                        <span class="item-title">Drive out date</span>
-                                        <span class="item-value"> 23/04/2015 15.45</span>
-                                    </div>
-                                    <div class="item-grid-entry">
-                                        <span class="item-title">Served By</span>
-                                        <div class="vehicle-server">Bruce Chimoyo</div>
+
                                     </div>
                                     <div class="item-grid-entry">
                                         <span class="item-title">Actions</span>
-                                        <button class="submit-button delete-button">Delete</button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="list-item account-list-item">
-                                <div class="list-item-grid">
-                                    <div class="item-grid-entry">
-                                        <span class="item-title">Vehicle License</span>
-                                        <span class="item-value"> ADR 0987</span>
-                                    </div>
-                                    <div class="item-grid-entry">
-                                        <span class="item-title">Image</span>
-                                        <span class="item-value"> image</span>
-                                    </div>
-                                    <div class="item-grid-entry">
-                                        <span class="item-title">Drive in date</span>
-                                        <span class="item-value"> 23/04/2015 09.45</span>
-                                    </div>
-                                    <div class="item-grid-entry">
-                                        <span class="item-title">Drive out date</span>
-                                        <span class="item-value"> 23/04/2015 15.45</span>
-                                    </div>
-                                    <div class="item-grid-entry">
-                                        <span class="item-title">Served By</span>
-                                        <div class="vehicle-server">Bruce Chimoyo</div>
-                                    </div>
-                                    <div class="item-grid-entry">
-                                        <span class="item-title">Actions</span>
-                                        <button class="submit-button delete-button">Delete</button>
+                                        <i class="fa-solid fa-trash"></i>
                                     </div>
                                 </div>
                             </div>

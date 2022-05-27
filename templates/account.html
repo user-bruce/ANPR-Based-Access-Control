@@ -13,22 +13,27 @@
                     <div class="name-and-edit-container">
                         <div class="names-row">
                             <span class="user-name">Bruce@1998</span>
-                            <i class="user-edit-button"><i class="fa-solid fa-pen"></i></i>
+                            <a class="edit-user-button" href={{ "./profile"}}>
+                                <div><i class="user-edit-button"><i class="fa-solid fa-pen"></i></i>
+                                </div>
+                            </a>
                         </div>
                         <span class="user-role">SYSTEM USER</span>
                     </div>
                 </div>
                 <div class="entities-container">
-                    <div class="entity-item">
-                        <i class="fa-solid fa-car entity-icon"></i>
-                        <span class="entity-name">Vehicles</span>
-                        <span class="entity-count">4</span>
-                    </div>
-                    <div class="entity-item">
-                        <i class="fa-solid fa-circle-user entity-icon"></i>
-                        <span class="entity-name">Users</span>
-                        <span class="entity-count">2</span>
-                    </div>
+                    <a href={{ "./account"}}>
+                        <div class="entity-item">
+                            <i class="fa-solid fa-car entity-icon"></i>
+                            <span class="entity-name">Vehicles</span>
+                        </div>
+                    </a>
+                    <a href={{ "./users"}}>
+                        <div class="entity-item">
+                            <i class="fa-solid fa-circle-user entity-icon"></i>
+                            <span class="entity-name">Users</span>
+                        </div>
+                    </a>
                 </div>
             </div>
             <div class="account-main-container">
@@ -62,7 +67,7 @@
                                     </div>
                                     <div class="item-grid-entry">
                                         <span class="item-title">Actions</span>
-                                        <button class="submit-button delete-button">Delete</button>
+                                        <i class="fa-solid fa-trash"></i>
                                     </div>
                                 </div>
                             </div>
@@ -90,7 +95,7 @@
                                     </div>
                                     <div class="item-grid-entry">
                                         <span class="item-title">Actions</span>
-                                        <button class="submit-button delete-button">Delete</button>
+                                        <i class="fa-solid fa-trash"></i>
                                     </div>
                                 </div>
                             </div>
@@ -118,10 +123,11 @@
                                     </div>
                                     <div class="item-grid-entry">
                                         <span class="item-title">Actions</span>
-                                        <button class="submit-button delete-button">Delete</button>
+                                        <i class="fa-solid fa-trash"></i>
                                     </div>
                                 </div>
                             </div>
+
                         </div>
                     </div>
                 </div>
