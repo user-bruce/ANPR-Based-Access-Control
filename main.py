@@ -333,7 +333,7 @@ if __name__ == "__main__":
     # Initialize the Neural Network
     model = NeuralNetwork()
 
-    cap = cv2.VideoCapture(0)
+    cap = cv2.VideoCapture('test_videos/video.MOV')
     while (cap.isOpened()):
         ret, img = cap.read()
         if ret == True:

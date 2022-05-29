@@ -1,10 +1,14 @@
+from datetime import datetime
+from dateutil import parser
 from enum import unique
 from imp import reload
+from sqlalchemy.orm import sessionmaker, relationship
 from multiprocessing import managers
 from flask import Flask, flash, redirect, session, render_template, Response, request, url_for
 import cv2
 import numpy as np
 from skimage.filters import threshold_local
+from sqlalchemy import ForeignKey
 import tensorflow as tf
 from skimage import measure
 import imutils
@@ -50,7 +54,7 @@ class User(UserMixin, db.Model):
     username = db.Column(db.String(20), unique=True, nullable=False)
     password = db.Column(db.String(20), nullable=False)
     phone = db.Column(db.String(20), nullable=False)
-    role = db.Column(db.String(25), nullable=False)
+    role = db.Column(db.Integer, nullable=False)
 
     #Constructor
     def __init__(self, username, password, phone, role):
@@ -71,8 +75,20 @@ class Vehicle(db.Model):
 
     vehicle_id = db.Column(db.Integer, primary_key=True)
     vehicle_reg = db.Column(db.String(10), unique=True)
-    img = db.Column(db.LargeBinary,nullable=True)
+    user_id = db.Column(db.Integer, ForeignKey('Users.id'))
+    vehicle_img = db.Column(db.LargeBinary,nullable=True)
 
+#Vehicle log model
+class VehicleLog(db.Model):
+
+    __tablename__="vehicle_logs"
+
+    vehicle_id = db.Column(db.Integer, nullable=False)
+    drive_in_date = db.Column(db.String(15), nullable=False)
+    drive_out_date = db.Column(db.String(15), nullable=True)
+    user = db.Column(db.Integer, nullable=True)
+    drive_out_time = db.Column(db.String(15), nullable=True)
+    drive_in_time = db.Column(db.String(15), nullable=False, primary_key=True)
 
 
 ##Read camera function
@@ -131,15 +147,16 @@ def home_page():
                 if bcrypt.check_password_hash(user.password, password):
                     print('Logged in!...')
                     login_user(user)
+                    flash("Succcessfuly Logged In !")
                     return redirect(url_for('dashboard'))
             
 
     return render_template('home.html', error=error, form=form)
 
-
 @app.route('/logout', methods=['GET', 'POST'])
 def logout():
     logout()
+    flash("Succcessfuly Logged Out !")
     return redirect(url_for('login'))
 
 
@@ -195,11 +212,18 @@ def vehicles():
 
 @app.route('/account')
 def account_page():
-    return render_template('account.html')
+    users = []
+    vehicles = Vehicle.query.all()
+    vehicle_count = len(vehicles)
+    for vehicle in vehicles:
+        user = User.query.filter_by(id=vehicle.user_id).first()
+        users.append(user.username)
+    return render_template('account.html',vehicle_count=vehicle_count, vehicles=vehicles, users=users)
 
 @app.route('/users')
 def users_page():
-    return render_template('users-list.html')
+    users = User.query.all()
+    return render_template('users-list.html', users=users)
 
 @app.route('/add-user', methods=['GET','POST'])
 def add_user_page():
@@ -227,11 +251,25 @@ def add_user_page():
             print(password)
             hashed_password = bcrypt.generate_password_hash(password)
 
-            user = User(username=username,password=hashed_password,phone=phone, role=role )
+            user = User(username=username, password=hashed_password,phone=phone, role=role)
             db.session.add(user)
             db.session.commit()
-            return redirect(url_for('account_page'))
+            return redirect(url_for('add_user'))
     return render_template('add-user.html', form=form,username_error=username_error, phone_error=phone_error)
+
+@app.route('/delete_user', methods=['DELETE','GET','POST'])
+def delete_user(user_id):
+    user = User.query.filter_by(id=user_id).first()
+    db.session.delete(user)
+    db.session.commit()
+    return redirect(url_for('users_page'))
+
+@app.route('/delete_vehicle', methods=['DELETE','GET','POST'])
+def delete_vehicle(id):
+    vehicle = Vehicle.query.filter_by(vehicle_id=id).first()
+    db.session.delete(vehicle)
+    db.session.commit()
+    return redirect(url_for('account_page'))
 
 @app.route('/profile', methods=['GET', 'POST'])
 def edit_profile():

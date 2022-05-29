@@ -13,7 +13,7 @@
                     <div class="name-and-edit-container">
                         <div class="names-row profile-section">
                             <span class="user-name">Bruce@1998</span>
-                            <a class="edit-user-button" href={{"./profile"}}>
+                            <a class="edit-user-button" href={{ "./profile"}}>
                                 <div><i class="user-edit-button"><i class="fa-solid fa-pen"></i></i>
                                 </div>
                             </a>
@@ -34,6 +34,12 @@
                             <span class="entity-name">Users</span>
                         </div>
                     </a>
+                    <a href={{ "./vehicles"}}>
+                        <div class="entity-item">
+                            <i class="fa-solid fa-file-signature entity-icon"></i>
+                            <span class="entity-name">Logs</span>
+                        </div>
+                    </a>
                 </div>
             </div>
             <div class="account-main-container">
@@ -47,33 +53,35 @@
                             </a>
                         </div>
                         <div class="vehicles-list">
+                            {% for user in users %}
                             <div class="list-item account-list-item">
                                 <div class="list-item-grid">
                                     <div class="item-grid-entry">
+                                        <span class="item-title">User Id</span>
+                                        <div class="vehicle-server">{{ user.id }}</div>
+                                    </div>
+                                    <div class="item-grid-entry">
                                         <span class="item-title">Username</span>
-                                        <span class="item-value">bruce@34</span>
+                                        <span class="item-value">{{ user.username }}</span>
                                     </div>
                                     <div class="item-grid-entry">
                                         <span class="item-title">Phone</span>
-                                        <span class="item-value">0775667548</span>
+                                        <span class="item-value">{{ user.phone }}</span>
                                     </div>
                                     <div class="item-grid-entry">
-                                        <span class="item-title">Joined date</span>
-                                        <span class="item-value"> 23/04/2015 09.45</span>
-                                    </div>
-                                    <div class="item-grid-entry">
-                                        <span class="item-title">Email</span>
-                                        <div class="vehicle-server">chimoyo.bruce@yahoo.com</div>
+                                        <span class="item-title">Role</span>
+                                        <div class="vehicle-server">{{ user.role }}</div>
                                     </div>
                                     <div class="item-grid-entry">
 
                                     </div>
                                     <div class="item-grid-entry">
                                         <span class="item-title">Actions</span>
-                                        <i class="fa-solid fa-trash"></i>
+                                        <a href={{url_for( 'delete_user', user_id=user.id)}}><i class="fa-solid fa-trash"></i></a>
                                     </div>
                                 </div>
                             </div>
+                            {% endfor %}
                         </div>
                     </div>
                 </div>

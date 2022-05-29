@@ -34,100 +34,51 @@
                             <span class="entity-name">Users</span>
                         </div>
                     </a>
+                    <a href={{ "./vehicles"}}>
+                        <div class="entity-item">
+                            <i class="fa-solid fa-file-signature entity-icon"></i>
+                            <span class="entity-name">Logs</span>
+                        </div>
+                    </a>
                 </div>
             </div>
             <div class="account-main-container">
 
                 <div class="account-lists-area">
                     <div class="lists-area-row">
-                        <div class="serach-container">
+                        <div class="search-container vehicle-search-area">
                             <input name="search-input" class="input-item search-input-control" placeholder="Search vehicles" type="text"> </div>
                         <div class="vehicles-list">
+                            {% for i in range(vehicle_count)%}
                             <div class="list-item account-list-item">
                                 <div class="list-item-grid">
                                     <div class="item-grid-entry">
-                                        <span class="item-title">Vehicle License</span>
-                                        <span class="item-value"> ADR 0987</span>
+                                        <span class="item-title">Vehicle ID</span>
+                                        <span class="item-value"> {{ vehicles[i].vehicle_id }}</span>
                                     </div>
                                     <div class="item-grid-entry">
-                                        <span class="item-title">Image</span>
-                                        <span class="item-value"> image</span>
+                                        <span class="item-title">Vehicle Registration</span>
+                                        <span class="item-value">{{ vehicles[i].vehicle_reg }}</span>
                                     </div>
                                     <div class="item-grid-entry">
-                                        <span class="item-title">Drive in date</span>
-                                        <span class="item-value"> 23/04/2015 09.45</span>
+                                        <span class="item-title">Authenticated By:</span>
+                                        <div class="vehicle-server">{{ users[i] }}</div>
                                     </div>
                                     <div class="item-grid-entry">
-                                        <span class="item-title">Drive out date</span>
-                                        <span class="item-value"> 23/04/2015 15.45</span>
+                                        <span class="item-title">Vehicle Image</span>
+                                        <span class="item-value"></span>
                                     </div>
                                     <div class="item-grid-entry">
-                                        <span class="item-title">Served By</span>
-                                        <div class="vehicle-server">Bruce Chimoyo</div>
-                                    </div>
-                                    <div class="item-grid-entry">
-                                        <span class="item-title">Actions</span>
-                                        <i class="fa-solid fa-trash"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="list-item account-list-item">
-                                <div class="list-item-grid">
-                                    <div class="item-grid-entry">
-                                        <span class="item-title">Vehicle License</span>
-                                        <span class="item-value"> ADR 0987</span>
-                                    </div>
-                                    <div class="item-grid-entry">
-                                        <span class="item-title">Image</span>
-                                        <span class="item-value"> image</span>
-                                    </div>
-                                    <div class="item-grid-entry">
-                                        <span class="item-title">Drive in date</span>
-                                        <span class="item-value"> 23/04/2015 09.45</span>
-                                    </div>
-                                    <div class="item-grid-entry">
-                                        <span class="item-title">Drive out date</span>
-                                        <span class="item-value"> 23/04/2015 15.45</span>
-                                    </div>
-                                    <div class="item-grid-entry">
-                                        <span class="item-title">Served By</span>
-                                        <div class="vehicle-server">Bruce Chimoyo</div>
+                                        <span class="item-title"></span>
+                                        <span class="item-value"></span>
                                     </div>
                                     <div class="item-grid-entry">
                                         <span class="item-title">Actions</span>
-                                        <i class="fa-solid fa-trash"></i>
+                                        <a href={{url_for('delete_vehicle', id=vehicles[i].vehicle_id)}}><i class="fa-solid fa-trash"></i></a>
                                     </div>
                                 </div>
                             </div>
-                            <div class="list-item account-list-item">
-                                <div class="list-item-grid">
-                                    <div class="item-grid-entry">
-                                        <span class="item-title">Vehicle License</span>
-                                        <span class="item-value"> ADR 0987</span>
-                                    </div>
-                                    <div class="item-grid-entry">
-                                        <span class="item-title">Image</span>
-                                        <span class="item-value"> image</span>
-                                    </div>
-                                    <div class="item-grid-entry">
-                                        <span class="item-title">Drive in date</span>
-                                        <span class="item-value"> 23/04/2015 09.45</span>
-                                    </div>
-                                    <div class="item-grid-entry">
-                                        <span class="item-title">Drive out date</span>
-                                        <span class="item-value"> 23/04/2015 15.45</span>
-                                    </div>
-                                    <div class="item-grid-entry">
-                                        <span class="item-title">Served By</span>
-                                        <div class="vehicle-server">Bruce Chimoyo</div>
-                                    </div>
-                                    <div class="item-grid-entry">
-                                        <span class="item-title">Actions</span>
-                                        <i class="fa-solid fa-trash"></i>
-                                    </div>
-                                </div>
-                            </div>
-
+                            {% endfor %}
                         </div>
                     </div>
                 </div>
