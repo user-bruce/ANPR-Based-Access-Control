@@ -254,7 +254,7 @@ def add_user_page():
             user = User(username=username, password=hashed_password,phone=phone, role=role)
             db.session.add(user)
             db.session.commit()
-            return redirect(url_for('add_user'))
+            return redirect(url_for('add_user_page'))
     return render_template('add-user.html', form=form,username_error=username_error, phone_error=phone_error)
 
 @app.route('/delete_user', methods=['DELETE','GET','POST'])
