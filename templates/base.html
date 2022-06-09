@@ -35,12 +35,8 @@
                 <div class="slogan">Seamless vehicle authentication</div>
             </div>
             <div class="user-area">
-                <div class="user-pic">
-                    <i class="fas user-icon fa-user-alt"></i>
-                    <span class="logged-in_name">Logged in as <a class="username-link" href={{"./account"}}>Bruce</a></span>
-                </div>
                 <div class="icon-links">
-                    <a class="edit-link"><i class="fas fa-power-off"></i></a>
+                    <a class="edit-link" href={{ "./logout"}}>Logout</a>
                 </div>
             </div>
         </div>
@@ -87,8 +83,30 @@
         })();
     </script>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+    <!--Close flash message JS-->
+    <script type="text/javascript">
+        // Get all elements with class="closebtn"
+        var close = document.getElementsByClassName("closebtn");
+        var i;
 
+        // Loop through all close buttons
+        for (i = 0; i < close.length; i++) {
+            // When someone clicks on a close button
+            close[i].onclick = function() {
+
+                // Get the parent of <span class="closebtn"> (<div class="alert">)
+                var div = this.parentElement;
+
+                // Set the opacity of div to 0 (transparent)
+                div.style.opacity = "0";
+
+                // Hide the div after 600ms (the same amount of milliseconds it takes to fade out)
+                setTimeout(function() {
+                    div.style.display = "none";
+                }, 600);
+            }
+        }
+    </script>
 </body>
 
 </html>

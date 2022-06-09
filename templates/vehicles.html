@@ -12,30 +12,36 @@
         </div>
         <div class="vehicles-list-container">
             <div class="vehicles-list-row">
+                {% for i in range(count)%}
                 <div class="list-item">
                     <div class="list-item-grid">
                         <div class="item-grid-entry">
                             <span class="item-title">Vehicle License</span>
-                            <span class="item-value"> ADR 0987</span>
+                            <span class="item-value">{{ plates[i].vehicle_reg }}</span>
                         </div>
                         <div class="item-grid-entry">
                             <span class="item-title">Drive in date</span>
-                            <span class="item-value"> 23/04/2015 09.45</span>
+                            <span class="item-value">{{ logs[i].drive_in_date }}</span>
                         </div>
                         <div class="item-grid-entry">
                             <span class="item-title">Drive out date</span>
-                            <span class="item-value"> 23/04/2015 15.45</span>
+                            <span class="item-value">{{ logs[i].drive_out_date }}</span>
                         </div>
                         <div class="item-grid-entry">
                             <span class="item-title">Image</span>
                             <div class="vehicle-image"></div>
                         </div>
                         <div class="item-grid-entry">
+                            <span class="item-title">Authenticated By</span>
+                            <span class="item-value">{{usernames[i].username}}</span>
+                        </div>
+                        <div class="item-grid-entry">
                             <span class="item-title">Actions</span>
-                            <i class="fa-solid fa-trash delete-icon"></i>
+                            <a href={{url_for( 'delete_log', log_id=logs[i].log_id)}}><i class="fa-solid fa-trash"></i></a>
                         </div>
                     </div>
                 </div>
+                {% endfor %}
             </div>
         </div>
     </div>

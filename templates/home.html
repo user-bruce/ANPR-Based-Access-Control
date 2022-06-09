@@ -5,7 +5,10 @@
             {% with messages = get_flashed_messages() %} {% if messages %}
             <ul class=flashes>
                 {% for message in messages %}
-                <li>{{ message }}</li>
+                <div class="alert success">
+                    <span class="closebtn">&times;</span>
+                    <strong>{{message}}</strong>
+                </div>
                 {% endfor %}
             </ul>
             {% endif %} {% endwith %}

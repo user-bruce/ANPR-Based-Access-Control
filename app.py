@@ -1,4 +1,5 @@
 from datetime import datetime
+import functools
 from dateutil import parser
 from enum import unique
 from imp import reload
@@ -19,8 +20,8 @@ from flask_login import (UserMixin,login_user,LoginManager,current_user,logout_u
 from flask_sqlalchemy import SQLAlchemy
 from forms import LoginForm, VehicleReportsForm,UserReportsForm,AddUserForm,ProfileForm
 from flask_bcrypt import Bcrypt
-
-from main import NeuralNetwork, PlateFinder
+import os
+from twilio.rest import Client
 
 
 #Initialize te application and secret key for form processing
@@ -30,6 +31,10 @@ bcrypt = Bcrypt(app)
 migrate = Migrate()
 camera = cv2.VideoCapture(0)
 
+
+#Twilio details setup
+account_sid = os.environ['TWILIO_ACCOUNT_SID']
+auth_token = os.environ['TWILIO_AUTH_TOKEN']
 
 #Setup login variables
 login_manager = LoginManager(app)
@@ -83,12 +88,12 @@ class VehicleLog(db.Model):
 
     __tablename__="vehicle_logs"
 
+    log_id = db.Column(db.Integer, nullable=False, primary_key=True)
     vehicle_id = db.Column(db.Integer, nullable=False)
-    drive_in_date = db.Column(db.String(15), nullable=False)
-    drive_out_date = db.Column(db.String(15), nullable=True)
-    user = db.Column(db.Integer, nullable=True)
-    drive_out_time = db.Column(db.String(15), nullable=True)
-    drive_in_time = db.Column(db.String(15), nullable=False, primary_key=True)
+    drive_in_date = db.Column(db.String(25), nullable=False)
+    drive_out_date = db.Column(db.String(25), nullable=True)
+    user_id = db.Column(db.Integer, nullable=True)
+    
 
 
 ##Read camera function
@@ -104,11 +109,14 @@ def generate_frames():
         yield(b'--frame\r\n'
                     b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
 
-#Comment out this code if bugs
-#Pass the video from webcam into neural network
-
-#End of comment
-
+#The login required function
+def login_required(func):
+    @functools.wraps(func)
+    def secure_function(*args, **kwargs):
+        if not current_user:
+            return redirect(url_for("home_page", next=request.url))
+        return func(*args, **kwargs)
+    return secure_function
 
 #Load curent session user
 @login_manager.user_loader
@@ -147,24 +155,24 @@ def home_page():
                 if bcrypt.check_password_hash(user.password, password):
                     print('Logged in!...')
                     login_user(user)
-                    flash("Succcessfuly Logged In !")
                     return redirect(url_for('dashboard'))
-            
-
     return render_template('home.html', error=error, form=form)
 
 @app.route('/logout', methods=['GET', 'POST'])
+@login_required
 def logout():
-    logout()
+    logout_user()
     flash("Succcessfuly Logged Out !")
-    return redirect(url_for('login'))
+    return redirect(url_for('home_page'))
 
 
 @app.route('/user-reports', methods=['GET','POST'])
+@login_required
 def reports_page():
     user_form = UserReportsForm()
     user_date_error = None
-    
+
+
     if request.method =='POST':
         from_date = request.form['dtlPicker1']
         to_date = request.form['dtlPicker2']
@@ -180,6 +188,7 @@ def reports_page():
 
 
 @app.route('/vehicle-reports', methods=['GET','POST'])
+@login_required
 def vehicles_reports():
     vehicles_form = VehicleReportsForm()
     vehicles_date_error = None
@@ -198,6 +207,7 @@ def vehicles_reports():
     return render_template('reports.html', error=vehicles_date_error, vehicles_form=vehicles_form)
 
 @app.route('/dashboard')
+@login_required
 def dashboard():
     return render_template('dashboard.html')
 
@@ -207,10 +217,24 @@ def video():
 
 
 @app.route('/vehicles')
+@login_required
 def vehicles():
-    return render_template('vehicles.html')
+    vehicle_logs =list(Vehicle.query.all())
+    vehicle_plates = []
+    usernames = []
+    logs_count = len(vehicle_logs)
+
+    for log in vehicle_logs:
+        plate = Vehicle.query.filter_by(vehicle_id=log.vehicle_id).first()
+        vehicle_plates.append(plate)
+
+        username = User.query.filter_by(id = log.user_id).first()
+        usernames.append(username)
+
+    return render_template('vehicles.html',plates = vehicle_plates, usernames = usernames, count = logs_count, logs = vehicle_logs)
 
 @app.route('/account')
+@login_required
 def account_page():
     users = []
     vehicles = Vehicle.query.all()
@@ -221,17 +245,22 @@ def account_page():
     return render_template('account.html',vehicle_count=vehicle_count, vehicles=vehicles, users=users)
 
 @app.route('/users')
+@login_required
 def users_page():
     users = User.query.all()
     return render_template('users-list.html', users=users)
 
 @app.route('/add-user', methods=['GET','POST'])
+@login_required
 def add_user_page():
     form = AddUserForm()
     username_error = None
     phone_error = None
     password_length = 10
     role=None
+
+    #Text message client
+    client = Client(account_sid, auth_token)
 
     if request.method =='POST':
         username = request.form['username']
@@ -254,24 +283,46 @@ def add_user_page():
             user = User(username=username, password=hashed_password,phone=phone, role=role)
             db.session.add(user)
             db.session.commit()
-            return redirect(url_for('add_user_page'))
+
+            #Send the actual text
+            message = client.messages \
+                .create(
+                     body="Dear user, you have been registered on the SmartPark Platform",
+                     from_='(351) 217-3708',
+                     to='+263778275503'
+                 )
+            print(message.sid)
+
+            #Return
+            return redirect(url_for('account_page'))
     return render_template('add-user.html', form=form,username_error=username_error, phone_error=phone_error)
 
-@app.route('/delete_user', methods=['DELETE','GET','POST'])
+@app.route('/delete_user/<user_id>', methods=['DELETE','GET','POST'])
+@login_required
 def delete_user(user_id):
     user = User.query.filter_by(id=user_id).first()
     db.session.delete(user)
     db.session.commit()
     return redirect(url_for('users_page'))
 
-@app.route('/delete_vehicle', methods=['DELETE','GET','POST'])
-def delete_vehicle(id):
-    vehicle = Vehicle.query.filter_by(vehicle_id=id).first()
+@app.route('/delete_log/<log_id>', methods=['DELETE','GET','POST'])
+@login_required
+def delete_log(log_id):
+    log = VehicleLog.query.filter_by(log_id=log_id)
+    db.session.delete(log)
+    db.session.commit()
+    return redirect(url_for('vehicles'))
+
+@app.route('/delete_vehicle/<vehicle_id>', methods=['DELETE','GET','POST'])
+@login_required
+def delete_vehicle(vehicle_id):
+    vehicle = Vehicle.query.filter_by(vehicle_id=vehicle_id).first()
     db.session.delete(vehicle)
     db.session.commit()
     return redirect(url_for('account_page'))
 
 @app.route('/profile', methods=['GET', 'POST'])
+@login_required
 def edit_profile():
     form = ProfileForm()
     username_error = None
@@ -304,4 +355,4 @@ def edit_profile():
 #Run the main application
 if __name__ == '__main__':
     
-    app.run(use_reload=True)
+    app.run(debug=True)
