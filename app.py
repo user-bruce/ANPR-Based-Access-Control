@@ -90,8 +90,8 @@ class VehicleLog(db.Model):
 
     log_id = db.Column(db.Integer, nullable=False, primary_key=True)
     vehicle_id = db.Column(db.Integer, nullable=False)
-    drive_in_date = db.Column(db.String(25), nullable=False)
-    drive_out_date = db.Column(db.String(25), nullable=True)
+    move_in_date = db.Column(db.String(25), nullable=False)
+    move_out_date = db.Column(db.String(25), nullable=True)
     user_id = db.Column(db.Integer, nullable=True)
     
 
@@ -219,17 +219,33 @@ def video():
 @app.route('/vehicles')
 @login_required
 def vehicles():
-    vehicle_logs =list(Vehicle.query.all())
+    vehicle_logs =list(VehicleLog.query.all())
     vehicle_plates = []
+    drive_ins = []
+    drive_outs = []
     usernames = []
     logs_count = len(vehicle_logs)
 
     for log in vehicle_logs:
+
+        #vehicles
         plate = Vehicle.query.filter_by(vehicle_id=log.vehicle_id).first()
         vehicle_plates.append(plate)
 
+        #users
         username = User.query.filter_by(id = log.user_id).first()
         usernames.append(username)
+
+        #drive ins
+        drivein_date = datetime.strptime(log.move_in_date, None)
+        drive_ins.append(drivein_date)
+
+        #drive outs
+        driveout_date = datetime.strptime(log.move_out_date, None)
+        drive_outs.append(driveout_date)
+
+        print(drivein_date)
+        print(driveout_date)
 
     return render_template('vehicles.html',plates = vehicle_plates, usernames = usernames, count = logs_count, logs = vehicle_logs)
 
