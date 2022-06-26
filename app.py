@@ -1,5 +1,6 @@
 from datetime import datetime
 import functools
+import requests
 from dateutil import parser
 from enum import unique
 from imp import reload
@@ -21,7 +22,6 @@ from flask_sqlalchemy import SQLAlchemy
 from forms import LoginForm, VehicleReportsForm,UserReportsForm,AddUserForm,ProfileForm
 from flask_bcrypt import Bcrypt
 import os
-from twilio.rest import Client
 
 
 #Initialize te application and secret key for form processing
@@ -135,7 +135,15 @@ def home_page():
 
     if request.method=='POST':
         
+        #Send text message
+        resp = requests.post('https://textbelt.com/text', {
+        'phone': '+263778275503',
+        'message': 'There is an unrecognized vehicle with plate ADE0966',
+        'key': 'textbelt',
+        })
+        print(resp.json())
 
+        #Process form
         username = request.form["username"]
         password = request.form["password"]
         
@@ -201,8 +209,8 @@ def vehicles_reports():
             vehicles_date_error = 'Please fill all fields'
 
         if from_date and to_date:
-            print(to_date)
-            print(from_date)
+            print(datetime.strptime(to_date, '%Y-%m-%dT%H:%M'))
+            print(datetime.strptime(from_date, '%Y-%m-%dT%H:%M'))
             return redirect(url_for('account_page'))
     return render_template('reports.html', error=vehicles_date_error, vehicles_form=vehicles_form)
 
@@ -237,17 +245,14 @@ def vehicles():
         usernames.append(username)
 
         #drive ins
-        drivein_date = datetime.strptime(log.move_in_date, None)
+        drivein_date = datetime.strptime(str(log.move_in_date),'%Y-%m-%dT%H:%M')
         drive_ins.append(drivein_date)
 
         #drive outs
-        driveout_date = datetime.strptime(log.move_out_date, None)
+        driveout_date = datetime.strptime(str(log.move_out_date), '%Y-%m-%dT%H:%M')
         drive_outs.append(driveout_date)
 
-        print(drivein_date)
-        print(driveout_date)
-
-    return render_template('vehicles.html',plates = vehicle_plates, usernames = usernames, count = logs_count, logs = vehicle_logs)
+    return render_template('vehicles.html',plates = vehicle_plates, drive_outs = drive_outs, drive_ins = drive_ins, usernames = usernames, count = logs_count, logs = vehicle_logs)
 
 @app.route('/account')
 @login_required
@@ -275,9 +280,6 @@ def add_user_page():
     password_length = 10
     role=None
 
-    #Text message client
-    client = Client(account_sid, auth_token)
-
     if request.method =='POST':
         username = request.form['username']
         phone = request.form['phone']
@@ -300,14 +302,6 @@ def add_user_page():
             db.session.add(user)
             db.session.commit()
 
-            #Send the actual text
-            message = client.messages \
-                .create(
-                     body="Dear user, you have been registered on the SmartPark Platform",
-                     from_='(351) 217-3708',
-                     to='+263778275503'
-                 )
-            print(message.sid)
 
             #Return
             return redirect(url_for('account_page'))
